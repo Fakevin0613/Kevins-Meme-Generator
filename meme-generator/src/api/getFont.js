@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getMemeName = async () => {
+const getFont = async () => {
     try {
         const options = {
             headers: {
@@ -8,7 +8,7 @@ const getMemeName = async () => {
                 'X-RapidAPI-Host': 'ronreiter-meme-generator.p.rapidapi.com'
             }
         };
-        const {data: {data}} = await axios.get(`https://ronreiter-meme-generator.p.rapidapi.com/images`, options);
+        const {data} = await axios.get(`https://ronreiter-meme-generator.p.rapidapi.com/fonts`, options);
         return data
     }
     catch (error) {
@@ -16,4 +16,4 @@ const getMemeName = async () => {
     }
 }
 
-export default getMemeName;
+export default getFont;
