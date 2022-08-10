@@ -20,7 +20,7 @@ const Main = () => {
 
 
   useEffect(() => {
-    getFont().then((data) => { getfontList(data); changeFont(data[0]) })
+    getFont().then((data) => { getfontList(data); changeFont(data[3]) })
     getMemeName().then((data) => { getMemeList(data) })
   }, [])
 
@@ -40,13 +40,13 @@ const Main = () => {
     setBottom("")
     setfontSizeValue("50")
     setmeme("")
-    changeFont("")
+    changeFont(fontList[3])
     changeName("")
   }
 
   return (
     <div className={classes.grid}>
-      <Grid container spacing={2} className={classes.grid}>
+      <Grid container spacing={3} className={classes.grid}>
         <Grid item xs={12}>
           <Typography variant="h4" color="initial" className={classes.title}>Try to make your own meme!</Typography>
         </Grid>
@@ -54,7 +54,6 @@ const Main = () => {
           <TextField
             fullWidth
             className={classes.top}
-            helperText="Text Limit"
             label="Top Text"
             value={topMessage}
             onChange={(newValue) => setTop(newValue.target.value)}
@@ -65,7 +64,6 @@ const Main = () => {
           <TextField
             fullWidth
             className={classes.bottom}
-            helperText="Text Limit"
             label="Bottom Text"
             value={bottomMessage}
             onChange={(newValue) => setBottom(newValue.target.value)}
@@ -76,7 +74,6 @@ const Main = () => {
           <TextField
             fullWidth
             className={classes.fontSizeValue}
-            helperText="Suggest range is 30 to 80"
             label="Font Size"
             type="number"
             value={fontSizeValue}
@@ -134,15 +131,15 @@ const Main = () => {
 
 
         <Grid item xs={6}>
-          <Button fullWidth variant="outlined" className={classes.clear} onClick={() => clearEveryThing()}>Clear</Button>
+          <Button fullWidth color = "secondary" variant="outlined" className={classes.clear} onClick={() => clearEveryThing()}>Clear</Button>
         </Grid>
 
         <Grid item xs={6}>
-          <Button fullWidth variant="outlined" className={classes.generate} onClick={() => generateMeme()}>Generate</Button>
+          <Button fullWidth color = "secondary" variant="outlined" className={classes.generate} onClick={() => generateMeme()}>Generate</Button>
         </Grid>
 
         <Grid item xs={12}>
-          <Button fullWidth variant="contained" className={classes.export}>Export</Button>
+          <Button fullWidth variant="contained" href = {meme} download className={classes.export}>Export</Button>
         </Grid>
 
         {(meme === "") ? null
