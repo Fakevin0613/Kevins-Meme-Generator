@@ -3,30 +3,31 @@ import { Grid, TextField, Button, Typography, FormControl, InputLabel, Select, M
 import mainStyle from './Style'
 import getFont from '../api/getFont'
 import getMeme from '../api/getMeme'
-import sample from './meme.jpeg'
 import { useState, useEffect } from 'react'
 
 
 const Main = () => {
   const classes = mainStyle();
-
   const [fontList, getfontList] = useState(null)
   // const [memeName, getMemeName] = useState(null)
   const [memefont, changefont] = useState("")
-  const [meme, setmeme] = useState(sample)
+  const [meme, setmeme] = useState("")
+
+  const [topMessage, setTop] = useState("")
+  const [bottomMessage, setBottom] = useState("")
+  const [fontSize, setFontSize] = useState("")
+
 
   useEffect(() => {
     getFont().then((data) => {getfontList(data)}) 
   }, [])
 
   const generateMeme = () => {
-    const top = document.getElementsByClassName(classes.top).value
-    const bottom = document.getElementsByClassName(classes.bottom).value
-    const fontSize = document.getElementsByClassName(classes.fontsize).value
-    const wordFont = document.getElementsByClassName(classes.wordfont).value
-    const memename = "Condescending-Wonka"
-
-    setmeme(getMeme(top, bottom, memename, fontSize, wordFont))
+    const memename = 'Condescending-Wonka'
+    console.log(topMessage)
+    getMeme(topMessage, bottomMessage, memename, fontSize, memefont).then(image => 
+      setmeme(image)
+    )
   }
 
   return (
@@ -41,6 +42,7 @@ const Main = () => {
             className={classes.top}
             helperText="Text Limit"
             label="Top Text"
+            onChange={(newValue) => setTop(newValue.target.value)}
           />
         </Grid>
 
@@ -50,6 +52,7 @@ const Main = () => {
             className={classes.bottom}
             helperText="Text Limit"
             label="Bottom Text"
+            onChange={(newValue) => setBottom(newValue.target.value)}
           />
         </Grid>
 
@@ -61,6 +64,7 @@ const Main = () => {
             label="Font Size"
             type="number"
             defaultValue="50"
+            onChange={(newValue) => setFontSize(newValue.target.value)}
           />
         </Grid>
 
@@ -74,7 +78,7 @@ const Main = () => {
               label="Word Font"
               className={classes.wordfont}
               value={memefont}
-              onChange={(font) => {changefont(font.target.value); console.log(font.target.value)}}
+              onChange={(font) => {changefont(font.target.value)}}
             >
               {
                 fontList.map((font) => (
