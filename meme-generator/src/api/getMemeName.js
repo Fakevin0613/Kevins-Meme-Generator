@@ -8,7 +8,7 @@ const getMemeName = async () => {
                 'X-RapidAPI-Host': 'ronreiter-meme-generator.p.rapidapi.com'
             }
         };
-        const {data: {data}} = await axios.get(`https://ronreiter-meme-generator.p.rapidapi.com/images`, options);
+        const {data} = await axios.get(`https://ronreiter-meme-generator.p.rapidapi.com/images`, options);
         return data
     }
     catch (error) {

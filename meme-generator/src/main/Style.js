@@ -9,6 +9,11 @@ const mainStyle = makeStyles({
     title: {
         textAlign: "center",
     },
+    memeGrid:{
+        display: "flex",
+        justifyContent: "center",
+        alignitems: "center",
+    }
 })
 
 export default mainStyle
